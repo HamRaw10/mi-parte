@@ -49,28 +49,32 @@ public class window extends JFrame implements Runnable{
 	}
 	
 	private void draw() {
-		bs = canvas.getBufferStrategy();
-		
-		if(bs == null) {
-			canvas.createBufferStrategy(3);
-			return;
-		}
-		
-		g = bs.getDrawGraphics();
-		
-		//------------------------
-		
-		g.drawRect(100, 100, 100, 100);
-		
-		//------------------------
-		g.dispose();
-		bs.show();
+	    bs = canvas.getBufferStrategy();
+
+	    if (bs == null) {
+	        canvas.createBufferStrategy(3);
+	        return;
+	    }
+
+	    g = bs.getDrawGraphics();
+
+	    // Limpiar el fondo antes de dibujar
+	    g.clearRect(0, 0, WIDTH, HEIGHT);
+
+	    //------------------------
+	    g.drawRect(100, 100, 100, 100); // Dibujar el rectángulo
+	    //------------------------
+
+	    g.dispose();
+	    bs.show();
 	}
+
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		while(running) {//Todo lo que va a pasar, cada fps
+			update();
 			draw();
 			
 		}
